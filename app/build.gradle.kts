@@ -46,10 +46,10 @@ android {
     }
 }
 
-repositories {
-    google()
+//repositories {
+//    google()
 //    mavenCentral()
-}
+//}
 
 dependencies {
 
