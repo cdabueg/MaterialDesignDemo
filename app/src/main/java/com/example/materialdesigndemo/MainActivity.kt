@@ -30,28 +30,26 @@ class MainActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(16.dp)
-                    )
-                    {
-                        // Centered profile icon
-                        ProfileIcon(imageVector = Icons.Default.Person, modifier = Modifier
-                            .fillMaxSize()
-                            .padding(15.dp), alignment = Alignment.Center)
+                            .padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Top
+                    ) {
+                        // Profile icon
+                        ProfileIcon(imageVector = Icons.Default.Person, modifier = Modifier.size(100.dp))
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        // Contact Form
+                        ContactForm()
                     }
-                    ContactForm()
                 }
             }
         }
     }
-}
-@Composable
-fun ProfileIcon(imageVector: ImageVector, modifier: Modifier, alignment: Alignment) {
-    Box(
-        modifier = modifier,
-        contentAlignment = alignment
-    ) {
-        Icon(imageVector = imageVector, contentDescription = "Profile Icon", modifier = Modifier.size(50.dp))
-    }
+
+    @Composable
+fun ProfileIcon(imageVector: ImageVector, modifier: Modifier) {
+    Icon(imageVector = imageVector, contentDescription = "Profile Icon", modifier = modifier.size(50.dp))
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -116,4 +114,5 @@ fun ContactForm() {
             Text("Submit")
         }
     }
+}
 }
