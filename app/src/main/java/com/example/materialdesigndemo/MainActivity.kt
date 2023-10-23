@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                 if (showDialog.value) {
                     DialogWithForm(
                         onDismissRequest = {showDialog.value = false},
-                        onConfirmation = {showDialog.value = false}
+                        onSubmit = {showDialog.value = false}
                     )
                 }
                 Surface(
@@ -87,46 +87,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DialogWithForm(
     onDismissRequest: () -> Unit,
-    onConfirmation: () -> Unit,
+    onSubmit: () -> Unit,
 ) {
     Dialog(onDismissRequest = { onDismissRequest() }) {
         MessageForm(onDismissRequest = { onDismissRequest() })
-//        Card(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(375.dp)
-//                .padding(16.dp),
-//            shape = RoundedCornerShape(16.dp),
-//        ) {
-//            Column(
-//                modifier = Modifier
-//                    .fillMaxSize(),
-//                verticalArrangement = Arrangement.Center,
-//                horizontalAlignment = Alignment.CenterHorizontally,
-//            ) {
-//                Text(
-//                    text = "This is a dialog with buttons and an image.",
-//                    modifier = Modifier.padding(16.dp),
-//                )
-//                Row(
-//                    modifier = Modifier
-//                        .fillMaxWidth(),
-//                    horizontalArrangement = Arrangement.Center,
-//                ) {
-//                    TextButton(
-//                        onClick = { onDismissRequest() },
-//                        modifier = Modifier.padding(8.dp),
-//                    ) {
-//                        Text("Dismiss")
-//                    }
-//                    TextButton(
-//                        onClick = { onConfirmation() },
-//                        modifier = Modifier.padding(8.dp),
-//                    ) {
-//                        Text("Confirm")
-//                    }
-//                }
-//            }
-//        }
     }
 }
