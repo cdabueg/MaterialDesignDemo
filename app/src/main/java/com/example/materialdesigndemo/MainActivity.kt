@@ -27,21 +27,21 @@ class MainActivity : ComponentActivity() {
             MaterialDesignDemoTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(16.dp),
+                }
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Top
-                    ) {
-                        // Profile icon
-                        ProfileIcon(imageVector = Icons.Default.Person, modifier = Modifier.size(100.dp))
+                ) {
+                    // Profile icon
+                    ProfileIcon(imageVector = Icons.Default.Person, modifier = Modifier.size(300.dp).padding(top = 150.dp))
 
-                        Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
 
-                        // Contact Form
-                        ContactForm()
-                    }
+                    // Contact Form
+                    ContactForm()
                 }
             }
         }
@@ -62,7 +62,9 @@ fun ContactForm() {
     Column(
         modifier = Modifier
             .padding(16.dp)
-            .fillMaxSize()
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement =  Arrangement.Center
     ) {
         TextField(
             value = name,
