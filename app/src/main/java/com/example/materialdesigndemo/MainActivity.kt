@@ -37,9 +37,10 @@ class MainActivity : ComponentActivity() {
                 val showDialog = remember { mutableStateOf(false) }
 
                 if (showDialog.value) {
-                    DialogWithForm(onDismissRequest = {showDialog.value = false}) {
-                        
-                    }
+                    DialogWithForm(
+                        onDismissRequest = {showDialog.value = false},
+                        onConfirmation = {showDialog.value = false}
+                    )
                 }
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -89,7 +90,7 @@ fun DialogWithForm(
     onConfirmation: () -> Unit,
 ) {
     Dialog(onDismissRequest = { onDismissRequest() }) {
-        MessageForm()
+        MessageForm(onDismissRequest = { onDismissRequest() })
 //        Card(
 //            modifier = Modifier
 //                .fillMaxWidth()
