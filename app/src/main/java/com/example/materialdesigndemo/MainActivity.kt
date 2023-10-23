@@ -3,12 +3,7 @@ package com.example.materialdesigndemo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -31,16 +26,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialDesignDemoTheme {
-                val name = remember { mutableStateOf("") }
-                val email = remember { mutableStateOf("") }
-                val message = remember { mutableStateOf("") }
+                val name = remember { mutableStateOf("Sample Name") }
+                val email = remember { mutableStateOf("sample@email") }
+                val message = remember { mutableStateOf("This is a sample message.") }
                 val showDialog = remember { mutableStateOf(false) }
 
                 if (showDialog.value) {
-                    DialogWithForm(
-                        onDismissRequest = {showDialog.value = false},
-                        onSubmit = {showDialog.value = false}
-                    )
+                    Dialog(onDismissRequest = {showDialog.value = false}) {
+                        MessageForm(onDismissRequest = {showDialog.value = false})
+                    }
                 }
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -81,15 +75,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun DialogWithForm(
-    onDismissRequest: () -> Unit,
-    onSubmit: () -> Unit,
-) {
-    Dialog(onDismissRequest = { onDismissRequest() }) {
-        MessageForm(onDismissRequest = { onDismissRequest() })
     }
 }
