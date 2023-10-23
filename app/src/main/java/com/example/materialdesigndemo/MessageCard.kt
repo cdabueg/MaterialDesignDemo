@@ -14,15 +14,15 @@ import androidx.compose.ui.unit.dp
 @ExperimentalMaterial3Api
 @Composable
 fun MessageCard(
-    name: String,
-    email: String,
-    message: String,
+    name: String = "",
+    email: String = "",
+    message: String = "",
     modifier: Modifier = Modifier
 ) {
     Spacer(modifier = Modifier.height(8.dp))
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 16.dp
+            defaultElevation = 8.dp
         ),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
