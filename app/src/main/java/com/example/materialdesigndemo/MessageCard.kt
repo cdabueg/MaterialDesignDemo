@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 @ExperimentalMaterial3Api
 @Composable
 fun MessageCard(
-    name: String = "",
+    nameCardProp: String = "",
     email: String = "",
     message: String = "",
     modifier: Modifier = Modifier
@@ -42,7 +42,7 @@ fun MessageCard(
                 .padding(18.dp)
         ) {
             TextField(
-                value = name,
+                value = nameCardProp,
                 onValueChange = {},
                 label = { Text("Name") },
                 leadingIcon = {

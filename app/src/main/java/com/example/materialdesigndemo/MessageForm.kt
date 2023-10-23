@@ -16,12 +16,16 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MessageForm(
-    onDismissRequest: () -> Unit,
+    name: String = "Default Name",
+    onNameChange: (String) -> Unit,
+    email: String = "Default Email",
+    onEmailChange: (String) -> Unit,
+    message: String = "Default Message",
+    onMessageChange: (String) -> Unit,
+    onCancel: () -> Unit,
+    onSubmit: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var message by remember { mutableStateOf("") }
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 8.dp
@@ -39,7 +43,7 @@ fun MessageForm(
         ) {
             TextField(
                 value = name,
-                onValueChange = { name = it },
+                onValueChange = onNameChange,
                 label = { Text("Name") },
                 leadingIcon = {
                     Icon(
@@ -54,7 +58,7 @@ fun MessageForm(
 
             TextField(
                 value = email,
-                onValueChange = { email = it },
+                onValueChange = onEmailChange,
                 label = { Text("Email") },
                 leadingIcon = {
                     Icon(
@@ -69,7 +73,7 @@ fun MessageForm(
 
             TextField(
                 value = message,
-                onValueChange = { message = it },
+                onValueChange = onMessageChange,
                 label = { Text("Message") },
                 maxLines = 5,
                 leadingIcon = {
@@ -84,7 +88,7 @@ fun MessageForm(
                 keyboardActions = KeyboardActions(
                     onDone = {
                         // Handle submission or other actions here
-                        onDismissRequest()
+                        onCancel()
                     }
                 ),
                 modifier = Modifier.fillMaxWidth()
@@ -97,17 +101,15 @@ fun MessageForm(
             horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             Button(
-                onClick = {
-                    onDismissRequest()
-                },
+                onClick = onCancel,
                 modifier = Modifier
             ) {
                 Text("Cancel")
             }
             Button(
-                onClick = {
-                    onDismissRequest()
-                },
+                onClick =
+                    onSubmit
+                ,
                 modifier = Modifier
             ) {
                 Text("Submit")

@@ -4,18 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.materialdesigndemo.ui.theme.MaterialDesignDemoTheme
 
@@ -26,14 +24,25 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialDesignDemoTheme {
-                val name = remember { mutableStateOf("Sample Name") }
-                val email = remember { mutableStateOf("sample@email") }
-                val message = remember { mutableStateOf("This is a sample message.") }
+                var name by rememberSaveable { mutableStateOf("") }
+                var email by rememberSaveable { mutableStateOf("") }
+                var message by rememberSaveable { mutableStateOf("") }
                 val showDialog = remember { mutableStateOf(false) }
 
                 if (showDialog.value) {
                     Dialog(onDismissRequest = {showDialog.value = false}) {
-                        MessageForm(onDismissRequest = {showDialog.value = false})
+                        MessageForm(
+                            name = name,
+                            onNameChange = {name = it},
+                            email = email,
+                            onEmailChange = {email = it},
+                            message = message,
+                            onMessageChange = {message = it},
+                            onCancel = {showDialog.value = false},
+                            onSubmit = {
+                                showDialog.value = false
+                            }
+                        )
                     }
                 }
                 Surface(
@@ -65,9 +74,9 @@ class MainActivity : ComponentActivity() {
                         LazyColumn(contentPadding = values, userScrollEnabled = true) {
                             items(20) {
                                 MessageCard(
-                                    name.value,
-                                    email.value,
-                                    message.value
+                                    name,
+                                    email,
+                                    message
                                 )
                             }
                         }
